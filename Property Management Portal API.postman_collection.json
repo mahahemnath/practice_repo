@@ -1,0 +1,1923 @@
+{
+  "info": {
+    "_postman_id": "0d689101-1667-403f-9020-9d93e5d3f501",
+    "name": "Property Management Portal API",
+    "description": "Postman collection for testing API v1 endpoints.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "28773037"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"aravind@test.com\",\n  \"password\": \"Aravind@123\"\n}\n"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/sessions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "sessions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Registrations",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\"user\": {\r\n\"first_name\": \"Test\",\r\n\"last_name\": \"Client\",\r\n\"email\": \"aravindsn.test@gmail.com\",\r\n\"phone\": \"9876543210\",\r\n\"password\": \"Aravind@123\",\r\n\"password_confirmation\": \"Aravind@123\",\r\n\"role\": \"client\"\r\n}\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/registrations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "registrations"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"aravindsn.test@gmail.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/forgot_password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "forgot_password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"token\": \"eyJfcmFpbHMiOnsiZGF0YSI6NSwiZXhwIjoiMjAyNi0wNy0xM1QwOTowMjo1NS43ODVaIiwicHVyIjoidXNlci9wYXNzd29yZF9yZXNldCJ9fQ==--3d300088b19ccabd277912c5d9d8eb482521dd64cd5225b4a9f47ca25b8d34ba\",\r\n    \"password\": \"Aravind.test@123\",\r\n    \"password_confirmation\": \"Aravind.test@123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/reset_password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "reset_password"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Properties",
+      "item": [
+        {
+          "name": "List Properties",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/properties?page=1&per_page=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "properties"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Property",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/properties/{{propertyId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "properties",
+                "{{propertyId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Property",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"property\": {\n    \"code\": \"PR001\",\n    \"name\": \"Main Campus\",\n    \"description\": \"HQ property\",\n    \"country\": \"India\",\n    \"state\": \"TN\",\n    \"city\": \"Chennai\",\n    \"address\": \"Anna Salai\",\n    \"zipcode\": \"600002\",\n    \"status\": \"active\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/properties",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "properties"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Property",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"property\": {\n    \"name\": \"Main Campus Updated\",\n    \"status\": \"active\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/properties/{{propertyId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "properties",
+                "{{propertyId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Property",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/properties/{{propertyId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "properties",
+                "{{propertyId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Buildings",
+      "item": [
+        {
+          "name": "List Buildings By Property",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/properties/{{propertyId}}/buildings?page=1&per_page=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "properties",
+                "{{propertyId}}",
+                "buildings"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Building",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"building\": {\n    \"property_id\": {{propertyId}},\n    \"name\": \"Tower A\",\n    \"building_code\": \"TA\",\n    \"description\": \"Residential tower\",\n    \"status\": \"active\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/properties/{{propertyId}}/buildings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "properties",
+                "{{propertyId}}",
+                "buildings"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Building",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/buildings/{{buildingId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "buildings",
+                "{{buildingId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Building",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"building\": {\n    \"name\": \"Tower A Updated\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/buildings/{{buildingId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "buildings",
+                "{{buildingId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Building",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/buildings/{{buildingId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "buildings",
+                "{{buildingId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Floors",
+      "item": [
+        {
+          "name": "List Floors By Building",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/buildings/{{buildingId}}/floors?page=1&per_page=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "buildings",
+                "{{buildingId}}",
+                "floors"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Floor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"floor\": {\n    \"building_id\": {{buildingId}},\n    \"floor_number\": 1,\n    \"name\": \"First Floor\",\n    \"description\": \"Family units\",\n    \"status\": \"available\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/buildings/{{buildingId}}/floors",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "buildings",
+                "{{buildingId}}",
+                "floors"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Floor",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/floors/{{floorId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "floors",
+                "{{floorId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Floor",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"floor\": {\n    \"name\": \"First Floor Updated\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/floors/{{floorId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "floors",
+                "{{floorId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Floor",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/floors/{{floorId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "floors",
+                "{{floorId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Unit Categories",
+      "item": [
+        {
+          "name": "List Unit Categories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/unit_categories?page=1&per_page=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "unit_categories"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Unit Category",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"unit_category\": {\n    \"name\": \"Apartment\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/unit_categories",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "unit_categories"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Unit Category",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/unit_categories/{{unitCategoryId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "unit_categories",
+                "{{unitCategoryId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Unit Category",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"unit_category\": {\n    \"name\": \"Apartment Updated\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/unit_categories/{{unitCategoryId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "unit_categories",
+                "{{unitCategoryId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Unit Category",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/unit_categories/{{unitCategoryId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "unit_categories",
+                "{{unitCategoryId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Unit Types",
+      "item": [
+        {
+          "name": "List Unit Types By Category",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/unit_categories/{{unitCategoryId}}/unit_types?page=1&per_page=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "unit_categories",
+                "{{unitCategoryId}}",
+                "unit_types"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Unit Type",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"unit_type\": {\n    \"unit_category_id\": {{unitCategoryId}},\n    \"name\": \"2BHK\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/unit_categories/{{unitCategoryId}}/unit_types",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "unit_categories",
+                "{{unitCategoryId}}",
+                "unit_types"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Unit Type",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/unit_types/{{unitTypeId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "unit_types",
+                "{{unitTypeId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Unit Type",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"unit_type\": {\n    \"name\": \"3BHK\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/unit_types/{{unitTypeId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "unit_types",
+                "{{unitTypeId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Unit Type",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/unit_types/{{unitTypeId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "unit_types",
+                "{{unitTypeId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Units",
+      "item": [
+        {
+          "name": "List Units By Building",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/buildings/{{buildingId}}/units?page=1&per_page=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "buildings",
+                "{{buildingId}}",
+                "units"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Units",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/units?page=1&per_page=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "units"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Unit",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"unit\": {\n    \"building_id\": {{buildingId}},\n    \"floor_id\": {{floorId}},\n    \"unit_type_id\": {{unitTypeId}},\n    \"parent_id\": null,\n    \"name\": \"A-101\",\n    \"unit_price\": 25000.00,\n    \"capacity\": 4,\n    \"booking_duration\": 2.0,\n    \"status\": \"active\",\n    \"is_bookable\": true\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/units",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "units"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Unit Under Building",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"unit\": {\n    \"building_id\": {{buildingId}},\n    \"floor_id\": {{floorId}},\n    \"unit_type_id\": {{unitTypeId}},\n    \"name\": \"A-102\",\n    \"capacity\": 3\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/buildings/{{buildingId}}/units",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "buildings",
+                "{{buildingId}}",
+                "units"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Unit",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/units/{{unitId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "units",
+                "{{unitId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Unit",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"unit\": {\n    \"name\": \"A-101 Premium\",\n    \"status\": \"active\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/units/{{unitId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "units",
+                "{{unitId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Unit",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/units/{{unitId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "units",
+                "{{unitId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Amenities",
+      "item": [
+        {
+          "name": "List Amenities By Unit",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/units/{{unitId}}/amenities?page=1&per_page=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "units",
+                "{{unitId}}",
+                "amenities"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Amenities",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/amenities?page=1&per_page=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "amenities"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Amenity",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amenity\": {\n    \"unit_id\": {{unitId}},\n    \"name\": \"Projector\",\n    \"description\": \"4K projector\",\n    \"status\": \"active\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/amenities",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "amenities"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Amenity Under Unit",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amenity\": {\n    \"unit_id\": {{unitId}},\n    \"name\": \"Whiteboard\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/units/{{unitId}}/amenities",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "units",
+                "{{unitId}}",
+                "amenities"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Amenity",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/amenities/{{amenityId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "amenities",
+                "{{amenityId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Amenity",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amenity\": {\n    \"description\": \"Updated description\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/amenities/{{amenityId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "amenities",
+                "{{amenityId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Amenity",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/amenities/{{amenityId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "amenities",
+                "{{amenityId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Amenity Attributes",
+      "item": [
+        {
+          "name": "List Amenity Attributes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/amenities/{{amenityId}}/amenity_attributes?page=1&per_page=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "amenities",
+                "{{amenityId}}",
+                "amenity_attributes"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Amenity Attribute",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amenity_attribute\": {\n    \"amenity_id\": {{amenityId}},\n    \"attribute_name\": \"lumens\",\n    \"attribute_value\": \"3500\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/amenities/{{amenityId}}/amenity_attributes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "amenities",
+                "{{amenityId}}",
+                "amenity_attributes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Amenity Attribute",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/amenity_attributes/{{amenityAttributeId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "amenity_attributes",
+                "{{amenityAttributeId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Amenity Attribute",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amenity_attribute\": {\n    \"attribute_value\": \"4000\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/amenity_attributes/{{amenityAttributeId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "amenity_attributes",
+                "{{amenityAttributeId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Amenity Attribute",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/amenity_attributes/{{amenityAttributeId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "amenity_attributes",
+                "{{amenityAttributeId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "List Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users?page=1&per_page=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "{{userId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"first_name\": \"Admin\",\n    \"last_name\": \"User\",\n    \"email\": \"admin@example.com\",\n    \"phone\": \"9999999999\",\n    \"password_digest\": \"$2a$12$replace_with_valid_bcrypt_hash\",\n    \"status\": \"active\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"first_name\": \"Admin Updated\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "{{userId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "{{userId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Bookings",
+      "item": [
+        {
+          "name": "List Bookings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/bookings?page=1&per_page=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "bookings"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Booking",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/bookings/{{bookingId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "bookings",
+                "{{bookingId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Booking",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"booking\": {\n    \"user_id\": {{userId}},\n    \"unit_id\": {{unitId}},\n    \"amenity_id\": {{amenityId}},\n    \"booking_date\": \"2026-07-10\",\n    \"start_time\": \"10:00\",\n    \"end_time\": \"12:00\",\n    \"status\": \"pending\",\n    \"no_of_people\": 2,\n    \"remarks\": \"Team meeting\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/bookings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "bookings"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Booking",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"booking\": {\n    \"status\": \"confirmed\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/bookings/{{bookingId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "bookings",
+                "{{bookingId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Booking",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/bookings/{{bookingId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "bookings",
+                "{{bookingId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Maintenance Schedules",
+      "item": [
+        {
+          "name": "List Maintenance Schedules",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/maintenance_schedules?page=1&per_page=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "maintenance_schedules"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Maintenance Schedule",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/maintenance_schedules/{{maintenanceScheduleId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "maintenance_schedules",
+                "{{maintenanceScheduleId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Maintenance Schedule",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"maintenance_schedule\": {\n    \"unit_id\": {{unitId}},\n    \"start_date\": \"2026-07-15\",\n    \"end_date\": \"2026-07-16\",\n    \"reason\": \"Air conditioning service\",\n    \"status\": \"scheduled\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/maintenance_schedules",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "maintenance_schedules"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Maintenance Schedule",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"maintenance_schedule\": {\n    \"status\": \"in_progress\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/maintenance_schedules/{{maintenanceScheduleId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "maintenance_schedules",
+                "{{maintenanceScheduleId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Maintenance Schedule",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/maintenance_schedules/{{maintenanceScheduleId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "maintenance_schedules",
+                "{{maintenanceScheduleId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Notifications",
+      "item": [
+        {
+          "name": "List Notifications By User",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/notifications?user_id={{userId}}&page=1&per_page=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "notifications"
+              ],
+              "query": [
+                {
+                  "key": "user_id",
+                  "value": "{{userId}}"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Notification",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/notifications/{{notificationId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "notifications",
+                "{{notificationId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Notification",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"notification\": {\n    \"user_id\": {{userId}},\n    \"booking_id\": {{bookingId}},\n    \"title\": \"Booking Confirmed\",\n    \"message\": \"Your booking is confirmed\",\n    \"notification_type\": \"booking\",\n    \"is_read\": false\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/notifications",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "notifications"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Notification",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"notification\": {\n    \"is_read\": true\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/notifications/{{notificationId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "notifications",
+                "{{notificationId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Notification",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/notifications/{{notificationId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "notifications",
+                "{{notificationId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "propertyId",
+      "value": "1"
+    },
+    {
+      "key": "buildingId",
+      "value": "1"
+    },
+    {
+      "key": "floorId",
+      "value": "1"
+    },
+    {
+      "key": "unitCategoryId",
+      "value": "1"
+    },
+    {
+      "key": "unitTypeId",
+      "value": "1"
+    },
+    {
+      "key": "unitId",
+      "value": "1"
+    },
+    {
+      "key": "amenityId",
+      "value": "1"
+    },
+    {
+      "key": "amenityAttributeId",
+      "value": "1"
+    },
+    {
+      "key": "userId",
+      "value": "1"
+    },
+    {
+      "key": "bookingId",
+      "value": "1"
+    },
+    {
+      "key": "maintenanceScheduleId",
+      "value": "1"
+    },
+    {
+      "key": "notificationId",
+      "value": "1"
+    }
+  ]
+}
